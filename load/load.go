@@ -21,6 +21,7 @@ func main() {
 	// config.SetProperty("hazelcast.client.invocation.timeout.seconds", "1")
 	// config.SetProperty("hazelcast.client.heartbeat.timeout", "1000")
 	config.NetworkConfig().SetConnectionAttemptLimit(math.MaxInt32)
+	config.NetworkConfig().SetConnectionTimeout(100 * time.Millisecond)
 	config.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
 	client, _ := hazelcast.NewClientWithConfig(config)
 
@@ -62,7 +63,7 @@ func printSize(mp core.Map, wg *sync.WaitGroup) {
 func load(mp core.Map, items int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i < items; i++ {
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(1000 * time.Millisecond)
 		// log.Printf("I: %v", i)
 		rnd := uuid.New().String()
 		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
