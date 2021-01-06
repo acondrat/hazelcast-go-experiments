@@ -55,7 +55,7 @@ func printSize(mp core.Map, wg *sync.WaitGroup) {
 func load(mp core.Map, items int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i < items; i++ {
-		log.Println(i)
+		log.Printf("I: %v", i)
 		rnd := uuid.New().String()
 		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
 		mp.Get(rnd)
@@ -66,7 +66,7 @@ func load(mp core.Map, items int, wg *sync.WaitGroup) {
 func printNumGoroutine(wg *sync.WaitGroup) {
 	defer wg.Done()
 	for {
-		log.Println(runtime.NumGoroutine())
+		log.Printf("Number of Goroutines: %v", runtime.NumGoroutine())
 		time.Sleep(time.Second)
 	}
 }
