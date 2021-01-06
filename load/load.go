@@ -58,7 +58,9 @@ func load(mp core.Map, items int, wg *sync.WaitGroup) {
 		log.Printf("I: %v", i)
 		rnd := uuid.New().String()
 		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
+		log.Println("Set!")
 		mp.Get(rnd)
+		log.Println("Get!")
 
 	}
 }
