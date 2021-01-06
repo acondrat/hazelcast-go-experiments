@@ -63,7 +63,7 @@ func printSize(mp core.Map, wg *sync.WaitGroup) {
 func load(mp core.Map, items int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i < items; i++ {
-		time.Sleep(1000 * time.Millisecond)
+		// time.Sleep(1000 * time.Millisecond)
 		// log.Printf("I: %v", i)
 		rnd := uuid.New().String()
 		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
