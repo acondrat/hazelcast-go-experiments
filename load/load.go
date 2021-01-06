@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"runtime"
 	"sync"
 	"time"
 
@@ -25,13 +26,16 @@ func main() {
 
 	var wg sync.WaitGroup
 
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 1; i++ {
 		wg.Add(1)
 		go load(mp, 10000000, &wg)
 	}
 
 	wg.Add(1)
 	go printSize(mp, &wg)
+
+	wg.Add(1)
+	go printNumGoroutine()
 
 	wg.Wait()
 
@@ -56,4 +60,9 @@ func load(mp core.Map, items int, wg *sync.WaitGroup) {
 		mp.Get(rnd)
 
 	}
+}
+
+func printNumGoroutine() {
+	log.Println(runtime.NumGoroutine())
+	time.Sleep(time.Second)
 }
