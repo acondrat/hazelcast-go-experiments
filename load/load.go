@@ -17,7 +17,7 @@ func main() {
 	// Connect
 	clientConfig := hazelcast.NewConfig()
 	clientConfig.NetworkConfig().AddAddress("hazelcast:5701")
-	clientConfig.SetProperty(property.LoggingLevel.Name(), logger.DebugLevel)
+	clientConfig.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
 	client, _ := hazelcast.NewClientWithConfig(clientConfig)
 
 	// The map is stored on the server but we can access it from the client
@@ -58,12 +58,12 @@ func printSize(mp core.Map, wg *sync.WaitGroup) {
 func load(mp core.Map, items int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i < items; i++ {
-		log.Printf("I: %v", i)
+		// log.Printf("I: %v", i)
 		rnd := uuid.New().String()
 		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
-		log.Println("Set!")
+		// log.Println("Set!")
 		mp.Get(rnd)
-		log.Println("Get!")
+		// log.Println("Get!")
 
 	}
 }
