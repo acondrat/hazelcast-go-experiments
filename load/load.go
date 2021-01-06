@@ -15,11 +15,12 @@ import (
 
 func main() {
 	// Connect
-	clientConfig := hazelcast.NewConfig()
-	clientConfig.NetworkConfig().AddAddress("hazelcast:5701")
-	clientConfig.SetProperty(property.InvocationTimeoutSeconds.Name(), "1")
-	clientConfig.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
-	client, _ := hazelcast.NewClientWithConfig(clientConfig)
+	config := hazelcast.NewConfig()
+	config.NetworkConfig().AddAddress("hazelcast:5701")
+	// config.SetProperty("hazelcast.client.invocation.timeout.seconds", "1")
+	config.SetProperty("hazelcast.client.heartbeat.timeout", "1000")
+	config.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
+	client, _ := hazelcast.NewClientWithConfig(config)
 
 	// The map is stored on the server but we can access it from the client
 	mapName := "default"
