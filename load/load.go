@@ -17,6 +17,7 @@ func main() {
 	// Connect
 	clientConfig := hazelcast.NewConfig()
 	clientConfig.NetworkConfig().AddAddress("hazelcast:5701")
+	clientConfig.SetProperty(property.InvocationTimeoutSeconds.Name(), "1")
 	clientConfig.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
 	client, _ := hazelcast.NewClientWithConfig(clientConfig)
 
