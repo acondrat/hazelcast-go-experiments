@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"math"
 	"runtime"
 	"sync"
 	"time"
@@ -18,7 +19,8 @@ func main() {
 	config := hazelcast.NewConfig()
 	config.NetworkConfig().AddAddress("hazelcast:5701")
 	// config.SetProperty("hazelcast.client.invocation.timeout.seconds", "1")
-	config.SetProperty("hazelcast.client.heartbeat.timeout", "1000")
+	// config.SetProperty("hazelcast.client.heartbeat.timeout", "1000")
+	config.NetworkConfig().SetConnectionAttemptLimit(math.MaxInt32)
 	config.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
 	client, _ := hazelcast.NewClientWithConfig(config)
 
