@@ -8,13 +8,16 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/hazelcast/hazelcast-go-client"
+	"github.com/hazelcast/hazelcast-go-client/config/property"
 	"github.com/hazelcast/hazelcast-go-client/core"
+	"github.com/hazelcast/hazelcast-go-client/core/logger"
 )
 
 func main() {
 	// Connect
 	clientConfig := hazelcast.NewConfig()
 	clientConfig.NetworkConfig().AddAddress("hazelcast:5701")
+	clientConfig.SetProperty(property.LoggingLevel.Name(), logger.DebugLevel)
 	client, _ := hazelcast.NewClientWithConfig(clientConfig)
 
 	// The map is stored on the server but we can access it from the client
