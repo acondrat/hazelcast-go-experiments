@@ -35,7 +35,7 @@ func main() {
 	go printSize(mp, &wg)
 
 	wg.Add(1)
-	go printNumGoroutine()
+	go printNumGoroutine(&wg)
 
 	wg.Wait()
 
@@ -62,7 +62,10 @@ func load(mp core.Map, items int, wg *sync.WaitGroup) {
 	}
 }
 
-func printNumGoroutine() {
-	log.Println(runtime.NumGoroutine())
-	time.Sleep(time.Second)
+func printNumGoroutine(wg *sync.WaitGroup) {
+	defer wg.Done()
+	for {
+		log.Println(runtime.NumGoroutine())
+		time.Sleep(time.Second)
+	}
 }
