@@ -38,8 +38,8 @@ func main() {
 	wg.Add(1)
 	go printSize(mp, &wg)
 
-	wg.Add(1)
-	go printNumGoroutine(&wg)
+	// wg.Add(1)
+	// go printNumGoroutine(&wg)
 
 	wg.Wait()
 
