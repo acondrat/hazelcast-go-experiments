@@ -29,23 +29,33 @@ func main() {
 	mapName := "default"
 	mp, _ := client.GetMap(mapName)
 
-	// clear the map
-	mp.Clear()
+	for {
+		size, _ := mp.Size()
+		log.Printf("Map '%v' Size %v\n", mp.Name(), size)
 
-	var wg sync.WaitGroup
+		rnd := uuid.New().String()
+		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
+		time.Sleep(time.Second)
 
-	for i := 0; i < 1; i++ {
-		wg.Add(1)
-		go load(mp, 10000000, &wg)
 	}
 
-	wg.Add(1)
-	go printSize(mp, &wg)
+	// clear the map
+	// mp.Clear()
+
+	// var wg sync.WaitGroup
+
+	// for i := 0; i < 1; i++ {
+	// 	wg.Add(1)
+	// 	go load(mp, 10000000, &wg)
+	// }
+
+	// wg.Add(1)
+	// go printSize(mp, &wg)
 
 	// wg.Add(1)
 	// go printNumGoroutine(&wg)
 
-	wg.Wait()
+	// wg.Wait()
 
 	// Disconnect
 	client.Shutdown()
