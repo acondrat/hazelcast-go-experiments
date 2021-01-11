@@ -21,6 +21,7 @@ func main() {
 	// config.SetProperty("hazelcast.client.invocation.timeout.seconds", "1")
 	// config.SetProperty("hazelcast.client.heartbeat.timeout", "1000")
 	config.NetworkConfig().SetConnectionAttemptLimit(math.MaxInt32)
+	config.NetworkConfig().SetConnectionAttemptPeriod(100 * time.Millisecond)
 	config.NetworkConfig().SetConnectionTimeout(100 * time.Millisecond)
 	config.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
 	client, _ := hazelcast.NewClientWithConfig(config)
