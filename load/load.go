@@ -35,8 +35,8 @@ func main() {
 		size, _ := mp.Size()
 		log.Printf("Map '%v' Size %v\n", mp.Name(), size)
 
-		// rnd := uuid.New().String()
-		// mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
+		rnd := uuid.New().String()
+		mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
 		log.Println("waiting...")
 		time.Sleep(time.Second)
 
