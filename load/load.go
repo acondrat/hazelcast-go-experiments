@@ -27,8 +27,9 @@ func main() {
 	client, _ := hazelcast.NewClientWithConfig(config)
 
 	// The map is stored on the server but we can access it from the client
-	// mapName := "default"
-	// mp, _ := client.GetMap(mapName)
+	mapName := "default"
+	mp, _ := client.GetMap(mapName)
+	log.Println(mp)
 
 	for {
 		// size, _ := mp.Size()
@@ -36,7 +37,7 @@ func main() {
 
 		// rnd := uuid.New().String()
 		// mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
-		log.Printf("waiting...")
+		log.Println("waiting...")
 		time.Sleep(time.Second)
 
 	}
