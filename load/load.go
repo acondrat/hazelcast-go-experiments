@@ -32,8 +32,8 @@ func main() {
 	log.Println(mp)
 
 	for {
-		// size, _ := mp.Size()
-		// log.Printf("Map '%v' Size %v\n", mp.Name(), size)
+		size, _ := mp.Size()
+		log.Printf("Map '%v' Size %v\n", mp.Name(), size)
 
 		// rnd := uuid.New().String()
 		// mp.SetWithTTL(rnd, rnd, time.Duration(3600)*time.Second)
