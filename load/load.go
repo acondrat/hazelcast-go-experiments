@@ -14,6 +14,19 @@ import (
 	"github.com/hazelcast/hazelcast-go-client/core/logger"
 )
 
+// func NewNetworkConfig() *NetworkConfig {
+// 	return &NetworkConfig{
+// 		addresses:               make([]string, 0),
+// 		connectionAttemptLimit:  2,
+// 		connectionAttemptPeriod: 3 * time.Second,
+// 		connectionTimeout:       5 * time.Second,
+// 		redoOperation:           false,
+// 		smartRouting:            true,
+// 		cloudConfig:             NewCloudConfig(),
+// 		sslConfig:               NewSSLConfig(),
+// 	}
+// }
+
 func main() {
 	// Connect
 	config := hazelcast.NewConfig()
@@ -22,7 +35,7 @@ func main() {
 	// config.SetProperty("hazelcast.client.heartbeat.timeout", "1000")
 	config.NetworkConfig().SetConnectionAttemptLimit(math.MaxInt32)
 	config.NetworkConfig().SetConnectionAttemptPeriod(100 * time.Millisecond)
-	config.NetworkConfig().SetConnectionTimeout(100 * time.Millisecond)
+	config.NetworkConfig().SetConnectionTimeout(500 * time.Millisecond)
 	config.SetProperty(property.LoggingLevel.Name(), logger.TraceLevel)
 	client, _ := hazelcast.NewClientWithConfig(config)
 
